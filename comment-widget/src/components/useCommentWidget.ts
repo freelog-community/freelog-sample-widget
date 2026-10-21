@@ -97,6 +97,9 @@ export function useCommentWidget(props: CommentWidgetProps) {
 
   const drawerVisible = ref(false);
   const commentInput = ref("");
+  const remainingCommentChars = computed(() =>
+    Math.max(0, COMMENT_MAX_LENGTH - commentInput.value.length)
+  );
   const replyingTo = ref<Comment | null>(null);
   const comments = ref<Comment[]>([]);
   const visibleComments = computed(() => comments.value.filter(isCommentVisibleToViewer));
@@ -1447,6 +1450,7 @@ export function useCommentWidget(props: CommentWidgetProps) {
     drawerVisible,
     commentInput,
     COMMENT_MAX_LENGTH,
+    remainingCommentChars,
     replyingTo,
     comments,
     visibleComments,
